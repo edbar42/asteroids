@@ -12,6 +12,8 @@ def main():
     y = SCREEN_HEIGHT / 2
     playerObj = Player(x, y)
     dt = 0
+    updatable = pygame.sprite.Group(playerObj)
+    drawable = pygame.sprite.Group(playerObj)
 
     while True:
         for event in pygame.event.get():
@@ -19,8 +21,10 @@ def main():
                 return
         dt = clock.tick(60) / 1000.0
         screen.fill(000000)
-        playerObj.update(dt)
-        playerObj.draw(screen)
+        for obj in drawable:
+            obj.draw(screen)
+        for obj in updatable:
+            obj.update(dt)
         pygame.display.flip()
 
 
